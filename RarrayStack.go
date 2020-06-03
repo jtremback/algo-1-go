@@ -28,7 +28,6 @@ func (r *RarrayStack) resize(capacity int) {
 
 func (r *RarrayStack) push(item string) {
 	r.Ops++
-	// println("N: ", r.N, "len(S): ", len(r.S))
 	if r.N == len(r.S) {
 		r.resize(r.N * 2)
 	}
@@ -46,7 +45,6 @@ func (r *RarrayStack) pop() string {
 	item := r.S[r.N]
 
 	if r.N > 0 && r.N == (len(r.S)/4) {
-		// println("N: ", r.N, "len(S): ", len(r.S))
 		r.resize(len(r.S) / 2)
 	}
 
