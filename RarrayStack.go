@@ -17,7 +17,6 @@ func (r *RarrayStack) isEmpty() bool {
 
 func (r *RarrayStack) resize(capacity int) {
 	r.Ops++
-	println("resize", capacity)
 	copy := make([]string, capacity)
 	for i := 0; i < r.N; i++ {
 		r.Ops++
@@ -42,13 +41,11 @@ func (r *RarrayStack) pop() string {
 		return ""
 	}
 
-	item := r.S[r.N]
-
 	if r.N > 0 && r.N == (len(r.S)/4) {
 		r.resize(len(r.S) / 2)
 	}
 
 	r.N = r.N - 1
-
+	item := r.S[r.N]
 	return item
 }
