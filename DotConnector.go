@@ -17,28 +17,42 @@ func DotConnector(dots []Dot) [][]Dot {
 	for i := 0; i < len(dots); i++ {
 		vertex := dots[i]
 		mergeSort(dots, vertex)
-		var buffer []Dot
+		buffer := []Dot{dots[0]}
 		// bufferIndex := 0
-		for j := 0; j < len(dots); j++ {
+		for j := 1; j < len(dots); j++ {
 			currentDot := dots[j]
 
-			if len(buffer) == 0 {
-				// If we have an empty buffer, start it
-				buffer = append(buffer, dots[j])
-			} else if slopeTo(vertex, buffer[len(buffer)-1]) == slopeTo(vertex, currentDot) {
+			// if len(buffer) == 0 {
+			// 	// If we have an empty buffer, start it
+			// 	buffer = append(buffer, dots[j])
+			// } else
+
+			if slopeTo(vertex, buffer[len(buffer)-1]) == slopeTo(vertex, currentDot) {
 				// If the current dot has the same slope as the last one in the buffer, add it in
 				buffer = append(buffer, dots[j])
-			} else if len(buffer) > 4 {
+			} else if len(buffer) >= 4 {
 				// If the current dot does not have the same slope and the last sequence is big enough to keep,
 				// put the last sequence in the collection and reset the buffer
-				collection = append(collection, buffer)
-				buffer = make([]Dot, 4)
+				collection = addToCollection(collection, buffer)
+				buffer = []Dot{dots[j]}
 			} else {
 				// If the current dot does not have the same slope and the last sequence is big enough to keep, reset the buffer
-				buffer = make([]Dot, 4)
+				buffer = []Dot{dots[j]}
 			}
 		}
+		if len(buffer) >= 4 {
+			// If we have looked at all items, and there is a valid sequence in the buffer
+			// put the last sequence in the collection
+			collection = addToCollection(collection, buffer)
+		}
 	}
+	return collection
+}
+
+func addToCollection(collection [][]Dot, buffer []Dot) [][]Dot {
+	appendBuffer := make([]Dot, len(buffer))
+	copy(appendBuffer, buffer)
+	return append(collection, appendBuffer)
 }
 
 func slopeTo(a Dot, b Dot) float64 {
