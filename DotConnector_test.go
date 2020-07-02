@@ -27,5 +27,5 @@ var input10 = []Dot{
 }
 
 func TestDotConnector(t *testing.T) {
-	fmt.Printf("%#v\n", DotConnector(input10))
+	fmt.Printf("%+v\n", DotConnector(definitelyLine))
 }
