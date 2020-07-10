@@ -27,7 +27,7 @@ func TestFuzzMergeSort(t *testing.T) {
 func generateRandomSlice(size int, rnge int) []int {
 	slice := make([]int, size, size)
 	for i := 0; i < size; i++ {
-		slice[i] = rand.Intn(rnge) - rand.Intn(rnge)
+		slice[i] = rand.Intn(rnge)
 	}
 	return slice
 }

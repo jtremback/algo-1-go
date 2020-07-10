@@ -10,10 +10,11 @@ func Partition(a []int) []int {
 	pivot := a[0]
 	i := 1
 	j := len(a) - 1
+	printArray(a, i, j)
 	for {
-		printArray(a, i, j)
-		// checkNotGreaterThan(a[1:i], pivot)
-		// checkNotLessThan(a[j:], pivot)
+		if i == j {
+			break
+		}
 		if a[i] > pivot {
 			item := a[i]
 			a[i] = a[j]
@@ -22,11 +23,23 @@ func Partition(a []int) []int {
 		} else {
 			i++
 		}
+		printArray(a, i, j)
 	}
+
+	checkNotGreaterThan(a[1:i], pivot)
+	checkNotLessThan(a[j+1:], pivot)
+
+	// Move pivot item to middle by swapping with last item on left
+	// Is this even neccessary??
+	item := a[i-1]
+	a[i-1] = a[0]
+	a[0] = item
+
+	return a
 }
 
 func printArray(a []int, i int, j int) {
-	fmt.Printf("%+v\n", a)
+	fmt.Printf("%+v i: %v, j: %v\n", a, i, j)
 	pointers := ""
 	for k := 0; k < len(a)+2; k++ {
 		if k == i {
@@ -38,6 +51,7 @@ func printArray(a []int, i int, j int) {
 		}
 
 	}
+
 	println(pointers)
 }
 
