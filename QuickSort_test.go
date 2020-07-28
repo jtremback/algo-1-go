@@ -11,7 +11,7 @@ func TestQSPartition(t *testing.T) {
 }
 
 func TestFuzzQSPartition(t *testing.T) {
-	trials := []int{50}
+	trials := []int{50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50}
 	for i := 0; i < len(trials); i++ {
 		arr := generateRandomSlice(trials[i], 10)
 		Partition(arr)
